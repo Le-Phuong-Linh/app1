@@ -52,7 +52,7 @@ def download_and_split(index_url, output_dir, status_container):
 
     status_container.write(f"Найдено страниц/глав для скачивания: {len(chapters)}")
     
-        os.makedirs(output_dir, exist_ok=True)
+    os.makedirs(output_dir, exist_ok=True)
 
     progress_bar = st.progress(0)
     total_chapters = len(chapters)
@@ -82,12 +82,12 @@ def download_and_split(index_url, output_dir, status_container):
                     out_f.write(full_chapter_text)
             
             progress_bar.progress(idx / total_chapters)
-            time.sleep(random.uniform(0.5, 1.0)) # Slightly faster for web UI, but safe
+            time.sleep(random.uniform(0.5, 1.0))
             
         except Exception as e:
             continue
 
-    status_container.success(f"Все готово! Главы сохранены.")
+    status_container.success("Все готово! Главы сохранены.")
     return True
 
 # --- STREAMLIT UI ---
@@ -100,11 +100,9 @@ if st.button("Start Download"):
     output_folder = "input"
     status_box = st.empty()
     
-    # Run the downloader
     success = download_and_split(url_input, output_folder, status_box)
     
     if success:
-        # Create a ZIP file of the output folder so the user can download it easily
         shutil.make_archive("downloaded_chapters", 'zip', output_folder)
         
         with open("downloaded_chapters.zip", "rb") as fp:
