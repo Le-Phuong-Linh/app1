@@ -2,7 +2,7 @@ import streamlit as st
 import os
 import sys
 import requests
-import regex re
+import re  # Using Python's built-in standard regex library
 from bs4 import BeautifulSoup
 import time
 import random
